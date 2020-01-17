@@ -23,7 +23,10 @@ const getPriceData = async (id) => {
 const calculateIndex = (indexes) => {
     let value = new Decimal(0);
     indexes.forEach(i => {
-        value = value.plus(new Decimal(i.units).times(new Decimal(i.priceData[i.coinId].usd)));
+        const price = i.priceData[i.coinId].usd;
+        if (price <= 0)
+            throw "invalid price";
+        value = value.plus(new Decimal(i.units).times(new Decimal(price)));
     });
     return value.toNumber()
 };
