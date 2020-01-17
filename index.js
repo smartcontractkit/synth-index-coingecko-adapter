@@ -37,9 +37,24 @@ const createRequest = async (input, callback) => {
         const coin = coinList.find(d => d.symbol.toLowerCase() === synth.symbol.toLowerCase());
         synth.coinId = coin.id;
         synth.priceData = await getPriceData(coin.id)
-    }));
+    })).catch(err => {
+        callback(500, {
+            jobRunID: input.id,
+            error: err,
+            statusCode: 500
+        })
+    });
 
-    data.result = calculateIndex(data.index);
+    try {
+        data.result = calculateIndex(data.index);
+    } catch (e) {
+        callback(500, {
+            jobRunID: input.id,
+            error: "failed getting price",
+            statusCode: 500
+        });
+        return
+    }
 
     callback(200, {
         jobRunID: input.id,
