@@ -6,7 +6,7 @@ Coingecko, and calculates a weighted index.
 ## Install
 
 ```bash
-yarn install
+yarn
 ```
 
 ## Test
