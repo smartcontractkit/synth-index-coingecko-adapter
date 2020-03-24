@@ -50,7 +50,7 @@ const createRequest = async (input, callback) => {
   try {
     const coinList = await getCoinList()
     await Promise.all(data.index.map(async (synth) => {
-      const coin = coinList.find(d => d.symbol.toLowerCase() === synth.symbol.toLowerCase())
+      const coin = coinList.find(d => d.symbol.toLowerCase() === synth.symbol.toLowerCase() && d.name != 'LEOcoin')
       synth.coinId = coin.id
       synth.priceData = await getPriceData(coin.id)
     }))

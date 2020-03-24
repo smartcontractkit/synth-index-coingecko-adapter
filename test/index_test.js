@@ -4,10 +4,12 @@ const createRequest = require('../index.js').createRequest
 describe('createRequest', () => {
   const jobID = '278c97ffadb54a5bbb93cfec5f7b5503'
 
-  context('when using default parameters', () => {
+  context('sCEX', () => {
     const req = {
       id: jobID,
-      data: {}
+      data: {
+        asset: 'sCEX'
+      }
     }
 
     it('returns data to the node', (done) => {
@@ -20,7 +22,7 @@ describe('createRequest', () => {
     })
   })
 
-  context('when defining a parameter', () => {
+  context('sDEFI', () => {
     const req = {
       id: jobID,
       data: {
